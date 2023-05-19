@@ -12,7 +12,7 @@ public class Page : AuditEntity
 	[Required]
 	public string? Title { get; set; }
 
-	[Required]
+	//[Required]
 	[Column(TypeName = "text")]
 	public string? Content { get; set; }
 

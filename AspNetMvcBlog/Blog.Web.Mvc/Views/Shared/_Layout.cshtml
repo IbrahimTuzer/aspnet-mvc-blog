@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Revolve - Personal Magazine blog Template</title>
@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    @Html.Partial("_Header")
+    @*@Html.Partial("_Header")*@
+    @await Component.InvokeAsync("Navbar")
 
     @RenderBody()
 

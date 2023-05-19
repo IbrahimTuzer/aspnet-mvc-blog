@@ -9,8 +9,10 @@ public class Post : AuditEntity
 	[Key]
 	public int Id { get; set; }
 
-	[Required]
+	
 	public int UserId { get; set; }
+	public User User { get; set; }
+
 
 	[Required]
 	[Column(TypeName = "nvarchar(200)")]
@@ -19,4 +21,9 @@ public class Post : AuditEntity
 	[Required]
 	[Column(TypeName = "ntext")]
 	public string? Content { get; set; }
+
+	public int CategoryId { get; set; }
+
+	// Navigation Properties
+	public Category Category { get; set; }
 }
