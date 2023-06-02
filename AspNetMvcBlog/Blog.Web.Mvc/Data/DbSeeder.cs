@@ -22,7 +22,7 @@ namespace Blog.Web.Mvc.Data
 			}
             if (!context.Users.Any())
             {
-                context.Users.Add(new User { Name = "Admin" });
+                context.Users.Add(new User { Name = "Admin" ,Email="admin@gmail.com",Password="admin",Phone="05366666666", City="Ankara"});
                 context.SaveChanges();
             }
             if (!context.Posts.Any())
