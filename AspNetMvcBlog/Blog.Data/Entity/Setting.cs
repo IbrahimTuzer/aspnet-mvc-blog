@@ -1,15 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Blog.Web.Mvc.Data.Entity;
+namespace Blog.Data.Entity;
 
 public class Setting
 {
     [Key]
     public int Id { get; set; }
-
-    [Required]
-    public int UserId { get; set; }
+    public int? UserId { get; set; }
+    public User? User { get; set; }
 
     [Column(TypeName = "nvarchar(200)")]
     public string? Name { get; set; }

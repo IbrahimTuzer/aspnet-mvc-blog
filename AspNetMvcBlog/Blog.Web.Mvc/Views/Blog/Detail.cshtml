@@ -6,7 +6,9 @@
                 <div class="single-post">
                     <div class="post-header mb-5 text-center">
                         <div class="meta-cat">
-                            <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1" href="#">@Model.Category.Name</a>
+                            @foreach(Category c in Model.Categories){
+                            <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1" href="@c.Slug"> @c.Name </a>
+                            }
                         </div>
                         <h2 class="post-title mt-2">
                             @Model.Title

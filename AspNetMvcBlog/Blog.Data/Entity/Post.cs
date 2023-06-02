@@ -1,8 +1,8 @@
-﻿using Blog.Web.Mvc.Data.Entity.Abstract;
+﻿using Blog.Data.Entity.Abstract;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Blog.Web.Mvc.Data.Entity;
+namespace Blog.Data.Entity;
 
 public class Post : AuditEntity
 {
@@ -22,8 +22,6 @@ public class Post : AuditEntity
 	[Column(TypeName = "ntext")]
 	public string? Content { get; set; }
 
-	public int CategoryId { get; set; }
-
 	// Navigation Properties
-	public Category Category { get; set; }
+	public List<Category> Categories { get; set; }
 }

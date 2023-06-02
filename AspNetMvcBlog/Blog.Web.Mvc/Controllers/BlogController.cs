@@ -1,5 +1,4 @@
-﻿using Blog.Web.Mvc.Data;
-using Blog.Web.Mvc.Data.Entity;
+﻿using Blog.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,20 +6,18 @@ namespace Blog.Web.Mvc.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly AppDbContext _db;
+        private readonly PostService _ps;
 
-        public BlogController(AppDbContext db)
+        public BlogController(PostService ps)
         {
-            _db = db;
+            _ps = ps;
         }
 
         public IActionResult Search(string query, int page = 1)
         {
-            var posts = _db.Posts
-                .Include(p => p.Category)
+            var posts = _ps.GetAll()
                 .Where(e => e.Title.Contains(query))
-                .Skip((page - 1) * 10).Take(10)
-                .ToList();
+                .Skip((page - 1) * 10).Take(10);
 
             ViewBag.Query = query;
 
@@ -30,11 +27,7 @@ namespace Blog.Web.Mvc.Controllers
         //[Route("/blog/title-slug")]
         public IActionResult Detail(int id)
         {
-            Post post = _db.Posts
-                .Include(p => p.Category)
-                .Include(p => p.User)
-                .Where(p=> p.Id == id)
-                .FirstOrDefault();
+            var post = _ps.GetById(id);
            if (post == null) { 
             return RedirectToAction("Index","Home");
             }

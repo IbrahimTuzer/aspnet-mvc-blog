@@ -1,4 +1,5 @@
-﻿using Blog.Web.Mvc.Data;
+﻿using Blog.Business.Services;
+using Blog.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,11 +7,13 @@ namespace Blog.Web.Mvc.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly AppDbContext _db;
+        private readonly PostService _ps;
+        private readonly CategoryService _cs;
 
-        public CategoryController(AppDbContext db)
+        public CategoryController(PostService ps,CategoryService cs)
         {
-            _db = db;
+            _ps = ps;
+            _cs = cs;
         }
 
         // /category/index/1
@@ -18,13 +21,12 @@ namespace Blog.Web.Mvc.Controllers
         [Route("/category/{slug}", Name = "CategorySlug")]
         public IActionResult Index(string slug, int page = 1)
         {
-            var posts = _db.Posts
-                .Include(p => p.Category)
-                .Where(e => e.Category.Slug == slug)
+            var posts = _ps.GetAll()
+                .Where(e => e.Categories.Any(e => e.Slug == slug))
                 .Skip((page - 1) * 10).Take(10)
                 .ToList();
 
-            var category = _db.Categories.Where(e => e.Slug == slug).FirstOrDefault();
+            var category = _cs.GetBySlug(slug);
             ViewBag.CategoryName = category.Name;
 
             return View(posts);

@@ -1,4 +1,4 @@
-﻿namespace Blog.Web.Mvc.Data.Entity.Abstract
+﻿namespace Blog.Data.Entity.Abstract
 {
 	public abstract class AuditEntity
 	{

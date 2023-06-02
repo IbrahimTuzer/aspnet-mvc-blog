@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Blog.Web.Mvc.Data.Entity;
+namespace Blog.Data.Entity;
 
 public class Category
 {
@@ -17,4 +17,5 @@ public class Category
 
     [Column(TypeName ="nvarchar(200)")]
     public string? Description { get; set; }
+    public List<Post> Posts { get; set; }
 }

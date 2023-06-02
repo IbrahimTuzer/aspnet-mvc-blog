@@ -1,5 +1,5 @@
 ﻿<!--Header Starts-->
-@using Blog.Web.Mvc.Data.Entity
+@using Blog.Data.Entity
 @model NavbarDto
 <header class="header-top bg-grey justify-content-center">
 	<div class="container">
@@ -31,9 +31,11 @@
 									}
 								</div>
 							</li>
+							@* pageleri service ekleyip burayı aç *@
 							@foreach(Page p in Model.pages){
 							<li class="nav-item"><a asp-controller="Home" asp-action="Index" class="nav-link">@p.Title</a></li>
 							}
+							
 						</ul>
 						<ul class="list-inline mb-0 d-block d-lg-none">
 							<li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>

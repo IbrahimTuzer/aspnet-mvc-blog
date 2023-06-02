@@ -24,7 +24,9 @@
                                 <div class="post-thumb mb-4">
                                     <img src="/images/news/f1.jpg" alt="" class="img-fluid w-100">
                                 </div>
-                                <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1">@post.Category.Name</span>
+                                @foreach(Category item in post.Categories){
+                                    <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1">@item.Name</span>
+                                }
                                 <h3 class="post-title mt-1"><a href="blog-single.html">@post.Title</a></h3>
                                 <div style="justify-content:space-between;display:flex;">
                                     <span class="mt-1 text-muted  text-capitalize">@post.CreatedAt.ToShortDateString()</span>
