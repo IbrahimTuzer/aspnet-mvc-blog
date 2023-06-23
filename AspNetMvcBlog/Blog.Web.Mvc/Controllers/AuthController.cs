@@ -1,12 +1,9 @@
-﻿using Blog.Data.Entity;
-using Blog.Data;
-using Blog.Data.Entity;
+﻿using Blog.Business.Dtos;
+using Blog.Business.Services;
 using Blog.Web.Mvc.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using Blog.Business.Services;
 
 namespace Blog.Web.Mvc.Controllers
 {
@@ -24,7 +21,7 @@ namespace Blog.Web.Mvc.Controllers
         public IActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid) {
-                _us.Insert(new User { Name = model.Name, Email = model.Email, Password = model.Password, Phone = "", City = "" });
+                _us.Insert(new UserDto { Name = model.Name, Email = model.Email, Password = model.Password, Phone = model.Phone != null ? model.Phone : "", City = model.City !=null?model.City: "" });
                 return RedirectToAction(nameof(Login));
             }
             else { 

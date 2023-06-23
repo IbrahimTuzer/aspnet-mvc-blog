@@ -1,13 +1,14 @@
-﻿using Blog.Data.Entity;
+﻿using Blog.Business.Dtos;
+
 
 namespace Blog.Business.Services.Abstract
 {
 	public interface IPageService
 	{
-		List<Page> GetAll();
-		Page GetById(int id);
-		void Insert(Page page);
-		void Update(Page page);
+		List<PageDto> GetAll();
+		PageDto GetById(int id);
+		void Insert(PageDto page);
+		void Update(PageDto page);
 		void DeleteById(int id);
 	}
 }

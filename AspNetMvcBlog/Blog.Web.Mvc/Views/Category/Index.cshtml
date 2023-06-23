@@ -1,4 +1,4 @@
-﻿@model List<Post>
+﻿@model List<PostDto>
 
 <div class="breadcrumb-wrapper">
     <div class="container">
@@ -24,7 +24,7 @@
                                 <div class="post-thumb mb-4">
                                     <img src="/images/news/f1.jpg" alt="" class="img-fluid w-100">
                                 </div>
-                                @foreach(Category item in post.Categories){
+                                @foreach(CategoryDto item in post.Categories){
                                     <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1">@item.Name</span>
                                 }
                                 <h3 class="post-title mt-1"><a href="blog-single.html">@post.Title</a></h3>

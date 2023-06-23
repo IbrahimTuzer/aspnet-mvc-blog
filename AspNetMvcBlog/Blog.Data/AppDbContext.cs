@@ -14,11 +14,8 @@ namespace Blog.Data
         public DbSet<Setting>  Settings { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            string connectionString = "Server=(localdb)\\MSSQLLocalDb; Database=AspNetMvcBlogDb;";
-            builder.UseSqlServer(connectionString);
-            base.OnConfiguring(builder);
         }
 
         //many to many, N - N Relationship

@@ -1,4 +1,4 @@
-﻿@model Post
+﻿@model PostDto
 <section class="single-block-wrapper section-padding">
     <div class="container">
         <div class="row">
@@ -6,7 +6,7 @@
                 <div class="single-post">
                     <div class="post-header mb-5 text-center">
                         <div class="meta-cat">
-                            @foreach(Category c in Model.Categories){
+                            @foreach(CategoryDto c in Model.Categories){
                             <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1" href="@c.Slug"> @c.Name </a>
                             }
                         </div>

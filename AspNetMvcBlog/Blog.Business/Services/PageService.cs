@@ -1,6 +1,7 @@
 ﻿using Blog.Business.Services.Abstract;
 using Blog.Data;
-using Blog.Data.Entity;
+using Blog.Business.Dtos;
+
 
 namespace Blog.Business.Services
 {
@@ -12,26 +13,26 @@ namespace Blog.Business.Services
 			_db = db;
 		}
 
-		public List<Page> GetAll()
+		public List<PageDto> GetAll()
 		{
-			return _db.Pages.ToList();
+			return _db.Pages.ToList().PageListToDtoList();
 
 		}
 
-		public Page GetById(int id)
+		public PageDto GetById(int id)
 		{
 			return _db.Pages
 				.Where(p => p.Id == id)
-				.FirstOrDefault();
+				.FirstOrDefault().PageToDto();
 		}
 
-		public void Insert(Page page)
+		public void Insert(PageDto page)
 		{
-			_db.Pages.Add(page);
+			_db.Pages.Add(page.DtoToPage());
 			_db.SaveChanges();
 		}
 
-		public void Update(Page page)
+		public void Update(PageDto page)
 		{
 			var oldPage = _db.Pages.FirstOrDefault(p => p.Id == page.Id);
 			if (oldPage != null)

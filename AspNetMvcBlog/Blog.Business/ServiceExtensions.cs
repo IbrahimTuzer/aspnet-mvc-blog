@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Business
 {
@@ -15,11 +16,11 @@ namespace Blog.Business
     {
         public static IServiceCollection AddBusinessServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>()/*(o =>
+            services.AddDbContext<AppDbContext>(o =>
             {
                 string connectionString = configuration.GetConnectionString("Default");
                 o.UseSqlServer(connectionString);
-            })*/;
+            });
             services.AddTransient<PostService>();
             services.AddTransient<CategoryService>();
             services.AddTransient<PageService>();

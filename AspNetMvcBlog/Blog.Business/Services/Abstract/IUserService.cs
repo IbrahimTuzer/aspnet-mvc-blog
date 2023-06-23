@@ -1,13 +1,14 @@
-﻿using Blog.Data.Entity;
+﻿using Blog.Business.Dtos;
+
 
 namespace Blog.Business.Services.Abstract
 {
 	public interface IUserService
 	{
-		List<User> GetAll();
-		User GetById(int id);
-		void Insert(User user);
-		void Update(User user);
+		List<UserDto> GetAll();
+		UserDto GetById(int id);
+		void Insert(UserDto user);
+		void Update(UserDto user);
 		void DeleteById(int id);
 	}
 }

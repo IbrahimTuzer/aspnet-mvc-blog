@@ -1,13 +1,14 @@
-﻿using Blog.Data.Entity;
+﻿using Blog.Business.Dtos;
+
 
 namespace Blog.Business.Services.Abstract
 {
 	public interface ISettingService
 	{
-		List<Setting> GetAll();
-		Setting GetById(int id);
-		void Insert(Setting setting);
-		void Update(Setting setting);
+		List<SettingDto> GetAll();
+		SettingDto GetById(int id);
+		void Insert(SettingDto setting);
+		void Update(SettingDto setting);
 		void DeleteById(int id);
 	}
 }

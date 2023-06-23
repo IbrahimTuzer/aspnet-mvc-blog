@@ -12,26 +12,26 @@ namespace Blog.Business.Services
 			_db = db;
 		}
 
-		public List<Setting> GetAll()
+		public List<SettingDto> GetAll()
 		{
-			return _db.Settings.ToList();
+			return _db.Settings.ToList().SettingListToDtoList();
 
 		}
 
-		public Setting GetById(int id)
+		public SettingDto GetById(int id)
 		{
 			return _db.Settings
 				.Where(p => p.Id == id)
-				.FirstOrDefault();
+				.FirstOrDefault().SettingToDto();
 		}
 
-		public void Insert(Setting setting)
+		public void Insert(SettingDto setting)
 		{
-			_db.Settings.Add(setting);
+			_db.Settings.Add(setting.DtoToSetting());
 			_db.SaveChanges();
 		}
 
-		public void Update(Setting setting)
+		public void Update(SettingDto setting)
 		{
 			var oldSetting = _db.Settings.FirstOrDefault(p => p.Id == setting.Id);
 			if (oldSetting != null)

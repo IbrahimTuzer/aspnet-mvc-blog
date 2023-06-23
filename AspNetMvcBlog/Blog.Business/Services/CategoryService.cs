@@ -1,6 +1,7 @@
 ﻿using Blog.Business.Services.Abstract;
 using Blog.Data;
-using Blog.Data.Entity;
+using Blog.Business.Dtos;
+
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,26 +18,26 @@ namespace Blog.Business.Services
             _db = db;
         }
 
-        public List<Category> GetAll()
+        public List<CategoryDto> GetAll()
         {
-            return _db.Categories.ToList();
+            return _db.Categories.ToList().CategoryListToDtoList();
 
         }
 
-        public Category GetById(int id)
+        public CategoryDto GetById(int id)
         {
             return _db.Categories
                 .Where(p => p.Id == id)
-                .FirstOrDefault();
+                .FirstOrDefault().CategoryToDto();
         }
 
-        public void Insert(Category category)
+        public void Insert(CategoryDto category)
         {
-            _db.Categories.Add(category);
+            _db.Categories.Add(category.DtoToCategory());
             _db.SaveChanges();
         }
 
-        public void Update(Category category)
+        public void Update(CategoryDto category)
         {
             var oldCategory = _db.Categories.FirstOrDefault(p => p.Id == category.Id);
             if (oldCategory != null)
@@ -56,9 +57,9 @@ namespace Blog.Business.Services
             }
         }
 
-        public Category GetBySlug(string slug)
+        public CategoryDto GetBySlug(string slug)
         {
-            return _db.Categories.Where(e => e.Slug == slug).FirstOrDefault();
+            return _db.Categories.Where(e => e.Slug == slug).FirstOrDefault().CategoryToDto();
         }
 
     }

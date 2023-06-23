@@ -1,13 +1,14 @@
-﻿using Blog.Data.Entity;
+﻿using Blog.Business.Dtos;
+
 
 namespace Blog.Business.Services.Abstract
 {
 	public interface IPostService
     {
-        List<Post> GetAll();
-        Post GetById(int id);
-        void Insert(Post post);
-        void Update(Post post);
+        List<PostDto> GetAll();
+        PostDto GetById(int id);
+        void Insert(PostDto post);
+        void Update(PostDto post);
         void DeleteById(int id);
     }
 }

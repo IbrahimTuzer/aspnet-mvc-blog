@@ -1,5 +1,5 @@
 ﻿using Blog.Business.Services;
-using Blog.Data;
+using Blog.Business.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

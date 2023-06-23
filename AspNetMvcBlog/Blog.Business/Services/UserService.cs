@@ -1,6 +1,6 @@
 ﻿using Blog.Business.Services.Abstract;
 using Blog.Data;
-using Blog.Data.Entity;
+using Blog.Business.Dtos;
 using System.Net;
 using System.Security.Claims;
 
@@ -14,31 +14,31 @@ namespace Blog.Business.Services
 			_db = db;
 		}
 
-		public List<User> GetAll()
+		public List<UserDto> GetAll()
 		{
-			return _db.Users.ToList();
+			return _db.Users.ToList().UserListToDtoList();
 
 		}
 
-		public User GetById(int id)
+		public UserDto GetById(int id)
 		{
 			return _db.Users
 				.Where(p => p.Id == id)
-				.FirstOrDefault();
+				.FirstOrDefault().UserToDto();
 		}
 
-		public User GetByEmailPassword(string email,string password)
+		public UserDto GetByEmailPassword(string email,string password)
 		{
-			return _db.Users.FirstOrDefault(e => e.Email == email && e.Password == password);
+			return _db.Users.FirstOrDefault(e => e.Email == email && e.Password == password).UserToDto();
 		}
 
-		public void Insert(User user)
+		public void Insert(UserDto user)
 		{
-			_db.Users.Add(user);
+			_db.Users.Add(user.DtoToUser());
 			_db.SaveChanges();
 		}
 
-		public void Update(User user)
+		public void Update(UserDto user)
 		{
 			var oldUser = _db.Users.FirstOrDefault(p => p.Id == user.Id);
 			if (oldUser != null)
@@ -58,7 +58,7 @@ namespace Blog.Business.Services
 			}
 		}
 
-		public ClaimsPrincipal ConvertToPrincipal(User user)
+		public ClaimsPrincipal ConvertToPrincipal(UserDto user)
 		{
 			var claims = new List<Claim>
 					{
