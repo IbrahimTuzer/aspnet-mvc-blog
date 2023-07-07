@@ -16,7 +16,7 @@ namespace Blog.Business
 
         public static PostDto PostToDto(this Post p)
         {
-            return new PostDto { Id=p.Id , Categories = p.Categories.CategoryListToDtoList() , Content=p.Content, CreatedAt = p.CreatedAt, DeletedAt = p.DeletedAt, Title = p.Title, UpdatedAt = p.UpdatedAt, UserId = p.UserId, User = p.User};
+            return new PostDto { Id=p.Id , Categories = p.Categories.CategoryListToDtoList() , Content=p.Content, CreatedAt = p.CreatedAt, DeletedAt = p.DeletedAt, Title = p.Title, UpdatedAt = p.UpdatedAt, UserId = p.UserId, User = p.User.UserToDto()};
         }
 
         public static List<PostDto> PostListToDtoList(this List<Post> p) { 
@@ -31,7 +31,7 @@ namespace Blog.Business
         }
         public static Post DtoToPost(this PostDto p)
         {
-            return new Post { Id = p.Id, Categories = p.Categories.DtoListToCategoryList(), Content = p.Content, CreatedAt = p.CreatedAt, DeletedAt = p.DeletedAt, Title = p.Title, UpdatedAt = p.UpdatedAt, UserId = p.UserId, User = p.User };
+            return new Post { Id = p.Id, Categories = p.Categories.DtoListToCategoryList(), Content = p.Content, CreatedAt = p.CreatedAt, DeletedAt = p.DeletedAt, Title = p.Title, UpdatedAt = p.UpdatedAt, UserId = p.UserId, User = p.User.DtoToUser() };
         }
 
         public static List<Post> DtoListToPostList(this List<PostDto> p)
@@ -48,7 +48,7 @@ namespace Blog.Business
 
         public static UserDto UserToDto(this User u)
         {
-            return u != null ? new UserDto { City = u.City, Email = u.Email, Id = u.Id, Name = u.Name, Password = u.Password, Phone = u.Phone } : null ;
+            return u != null ? new UserDto { City = u.City, Email = u.Email, Id = u.Id, Name = u.Name, Password = u.Password, Phone = u.Phone ,Roles = u.Roles} : null ;
         }
 
         public static List<UserDto> UserListToDtoList(this List<User> p)
@@ -84,7 +84,7 @@ namespace Blog.Business
         }
         public static Category DtoToCategory(this CategoryDto c)
         {
-            return new Category { Description = c.Description, Name = c.Name, Id = c.Id, Posts = c.Posts.DtoListToPostList(), Slug = c.Slug };
+            return new Category { Description = c.Description, Name = c.Name, Id = c.Id, /*Posts = c.Posts.DtoListToPostList(),*/ Slug = c.Slug };
 
         }
         public static List<Category> DtoListToCategoryList(this List<CategoryDto> p)

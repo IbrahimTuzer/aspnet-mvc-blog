@@ -9,7 +9,7 @@
 					<img src="/images/logo.png" alt="" class="img-fluid">
 				</a>
 			</div>
-			<div class="col-lg-8 col-md-12">
+			<div class="col-lg-10 col-md-12">
 				<nav class="navbar navbar-expand-lg navigation-2 navigation">
 					<a class="navbar-brand text-uppercase d-lg-none" asp-controller="Home" asp-action="Index">
 						<img src="/images/logo.png" alt="" class="img-fluid">
@@ -37,28 +37,51 @@
 							}
 							
 						</ul>
+						
 						<ul class="list-inline mb-0 d-block d-lg-none">
 							<li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="ti-twitter"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="ti-pinterest"></i></a></li>
 						</ul>
+						
 					</div>
 					<div class="text-right search d-none d-lg-block">
 						<div class="search_toggle"><i class="ti-search"></i></div>
 					</div>
+
+
+					@if (!Context.User.Identity.IsAuthenticated)
+					{
+						<ul class="list-inline mb-0">
+							<li class="list-inline-item"><a asp-controller="auth" asp-action="register">Register</a></li>
+							<li class="list-inline-item"><a asp-controller="auth" asp-action="login">Login</a></li>
+						</ul>
+					}
+					else
+					{
+						<ul class="menu navbar-nav mx-auto">
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									@Context.User.Identity.Name
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+									@if (Context.User.IsInRole("Admin"))
+									{
+										<a class="dropdown-item" asp asp-area="admin">Admin Page</a>
+									}
+									<a class="dropdown-item" asp-controller="Auth" asp-action="logout">Logout</a>
+									
+								</div>
+							</li>
+
+						</ul>
+					}
+
 				</nav>
 			</div>
-			<div class="col-lg-2 col-md-4 col-6">
-				<div class="header-socials-2 text-right d-none d-lg-block">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="ti-twitter"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="ti-pinterest"></i></a></li>
-					</ul>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 </header>

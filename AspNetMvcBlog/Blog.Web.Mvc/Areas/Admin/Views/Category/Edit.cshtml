@@ -1,0 +1,16 @@
+﻿@model CategoryDto
+<form asp-action="Edit" method="post">
+<div class="mb-3">
+    <label class="form-label" asp-for="Name"></label>
+    <input asp-for="Name" type="text" class="form-control">
+</div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Slug"></label>
+        <input asp-for="Slug" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Description"></label>
+        <input asp-for="Description" type="text" class="form-control">
+    </div>
+    <button class="btn btn-secondary" type="submit">Edit</button> <a asp-action="Index" class="btn btn-primary"> Go Back</a>  
+</form>

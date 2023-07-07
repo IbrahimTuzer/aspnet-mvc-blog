@@ -1,0 +1,9 @@
+﻿@model CategoryDto
+
+<h1>@Model.Name</h1>
+<h2>@Model.Slug</h2>
+<hr />
+<h2>@Model.Description</h2>
+<form asp-action="Delete" method="post">
+<h3> Do you really want to delete this Category  <button class="btn btn-danger" type="submit"> Yes </button> <a class="btn btn-success" asp-action="Index"> No </a>    </h3>
+</form>

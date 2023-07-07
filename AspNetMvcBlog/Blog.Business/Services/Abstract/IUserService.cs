@@ -1,5 +1,5 @@
 ﻿using Blog.Business.Dtos;
-
+using System.Security.Claims;
 
 namespace Blog.Business.Services.Abstract
 {
@@ -7,8 +7,12 @@ namespace Blog.Business.Services.Abstract
 	{
 		List<UserDto> GetAll();
 		UserDto GetById(int id);
-		void Insert(UserDto user);
+		UserDto GetByEmailPassword(string email, string password);
+
+        void Insert(UserDto user);
 		void Update(UserDto user);
 		void DeleteById(int id);
-	}
+		ClaimsPrincipal ConvertToPrincipal(UserDto user);
+
+    }
 }

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<PostDto>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Title</th>
+            <th scope="col">content</th>
+            <th scope="col">Categories</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var i in Model){
+        <tr>
+            <th scope="row">@i.Id</th>
+            <td>@i.User.Name</td>
+            <td>@i.Title</td>
+            <td>@i.Content</td>
+            <td>
+                    @foreach(CategoryDto c in i.Categories)
+                    {
+                        <text>@c.Name </text>
+                    }
+            </td>
+                
+                <td>
+                    <a asp-action="Edit" asp-route-id="@i.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@i.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@i.Id">Delete</a>
+                </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -13,7 +13,7 @@ public class PostDto : AuditEntity
 
 	
 	public int UserId { get; set; }
-	public User User { get; set; }
+	public UserDto User { get; set; }
 
 
 	[Required]
@@ -25,5 +25,5 @@ public class PostDto : AuditEntity
 	public string? Content { get; set; }
 
 	// Navigation Properties
-	public List<CategoryDto> Categories { get; set; }
+	public List<CategoryDto>? Categories { get; set; }
 }

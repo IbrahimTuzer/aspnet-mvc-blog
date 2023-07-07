@@ -1,4 +1,5 @@
 ﻿using Blog.Business.Services;
+using Blog.Business.Services.Abstract;
 using Blog.Data;
 using Blog.Data.Entity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +8,10 @@ namespace Blog.Web.Mvc.ViewComponents;
 
 public class NavbarViewComponent : ViewComponent
 {
-	private readonly CategoryService _cs;
+	private readonly ICategoryService _cs;
 	private readonly PageService _pageService;
 
-	public NavbarViewComponent(CategoryService cs,PageService pageService)
+	public NavbarViewComponent(ICategoryService cs,PageService pageService)
 	{
 		_cs = cs;
 		_pageService = pageService;

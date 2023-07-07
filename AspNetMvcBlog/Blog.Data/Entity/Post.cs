@@ -19,9 +19,9 @@ public class Post : AuditEntity
 	public string? Title { get; set; }
 
 	[Required]
-	[Column(TypeName = "ntext")]
+	[Column(TypeName = "nvarchar(max)")]
 	public string? Content { get; set; }
 
 	// Navigation Properties
-	public List<Category> Categories { get; set; }
+	public List<Category>? Categories { get; set; }
 }

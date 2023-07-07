@@ -18,7 +18,7 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpGet]
-        public List<PostDto> Get()
+        public IEnumerable<PostDto> Get()
         {
             return _postService.GetAll(); // GetAll içindeki Includelar ile birlikte çalıştırılınca hata çıkarıyor
         }
@@ -41,7 +41,7 @@ namespace Blog.Web.Api.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] PostDto post)
         {
-            _postService.Update(post);
+            _postService.Update(id, post);
         }
 
         // DELETE api/<PostController>/5

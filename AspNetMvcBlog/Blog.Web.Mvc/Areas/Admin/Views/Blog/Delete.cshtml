@@ -1,0 +1,16 @@
+﻿@model PostDto
+
+<h1>@Model.Title</h1>
+<h2>@Model.User.Name</h2>
+<h3>@Model.CreatedAt</h3>
+<hr />
+@foreach (CategoryDto c in Model.Categories)
+{
+    <h4>@c.Name</h4>
+
+}
+<h5>@Model.Content</h5>
+
+<form asp-action="Delete" method="post">
+<h3> Do you really want to delete this Category  <button class="btn btn-danger" type="submit"> Yes </button> <a class="btn btn-success" asp-action="Index"> No </a>    </h3>
+</form>

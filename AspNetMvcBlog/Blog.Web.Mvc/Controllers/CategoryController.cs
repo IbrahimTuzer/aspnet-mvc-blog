@@ -2,18 +2,19 @@
 using Blog.Business.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Blog.Business.Services.Abstract;
 
 namespace Blog.Web.Mvc.Controllers
 {
     public class CategoryController : Controller
     {
         private readonly PostService _ps;
-        private readonly CategoryService _cs;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(PostService ps,CategoryService cs)
+        public CategoryController(PostService ps, ICategoryService cs)
         {
             _ps = ps;
-            _cs = cs;
+            _categoryService = cs;
         }
 
         // /category/index/1
@@ -26,7 +27,7 @@ namespace Blog.Web.Mvc.Controllers
                 .Skip((page - 1) * 10).Take(10)
                 .ToList();
 
-            var category = _cs.GetBySlug(slug);
+            var category = _categoryService.GetBySlug(slug);
             ViewBag.CategoryName = category.Name;
 
             return View(posts);

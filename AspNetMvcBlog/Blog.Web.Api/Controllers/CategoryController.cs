@@ -18,7 +18,7 @@ namespace Blog.Web.Api.Controllers
 
         // GET: api/<CategoryController>
         [HttpGet]
-        public List<CategoryDto> Get()
+        public IEnumerable<CategoryDto> Get()
         {
             return _categoryService.GetAll();
         }

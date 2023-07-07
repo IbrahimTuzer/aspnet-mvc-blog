@@ -1,0 +1,22 @@
+﻿@model PostDto
+<form asp-action="Create" method="post">
+<div class="mb-3">
+    <label class="form-label" asp-for="Title"></label>
+    <input asp-for="Title" type="text" class="form-control">
+</div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Content"></label>
+        <input asp-for="Content" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+        <select name="categories" multiple>
+            @foreach (var c in ViewBag.categories)
+            {
+                <option value="@c.Id">
+                    @c.Name
+                </option>
+            }
+        </select>
+    </div>
+    <button class="btn btn-secondary" type="submit">Create</button> <a asp-action="Index" class="btn btn-primary"> Go Back</a>  
+</form>

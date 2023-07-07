@@ -18,7 +18,7 @@ namespace Blog.Business.Services
             _db = db;
         }
 
-        public List<CategoryDto> GetAll()
+        public IEnumerable<CategoryDto> GetAll()
         {
             return _db.Categories.ToList().CategoryListToDtoList();
 

@@ -1,17 +1,19 @@
 ﻿using Blog.Business.Dtos;
 using Blog.Business.Services;
+using Blog.Business.Services.Abstract;
 using Blog.Web.Mvc.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Blog.Web.Mvc.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly UserService _us;
+        private readonly IUserService _us;
 
-        public AuthController(UserService us) {
+        public AuthController(IUserService us) {
             _us = us;
         }
 
@@ -20,6 +22,7 @@ namespace Blog.Web.Mvc.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
+            if (HttpContext.User.Identity.IsAuthenticated) return Redirect("/");
             if (ModelState.IsValid) {
                 _us.Insert(new UserDto { Name = model.Name, Email = model.Email, Password = model.Password, Phone = model.Phone != null ? model.Phone : "", City = model.City !=null?model.City: "" });
                 return RedirectToAction(nameof(Login));
@@ -35,6 +38,8 @@ namespace Blog.Web.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            if (HttpContext.User.Identity.IsAuthenticated) return Redirect("/");
+            
             if (ModelState.IsValid)
             {
                 var user =_us.GetByEmailPassword(model.Email,model.Password);
@@ -43,6 +48,7 @@ namespace Blog.Web.Mvc.Controllers
                     var props = new AuthenticationProperties() { ExpiresUtc = DateTime.UtcNow.AddMinutes(60) };
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,_us.ConvertToPrincipal(user),props);
+                    if (!user.Roles.IsNullOrEmpty() && user.Roles.Contains("Admin")) return Redirect("/Admin/home");
                     return Redirect("/");
                 }
                 else {
